@@ -1,0 +1,32 @@
+---
+// Inline line icons (currentColor). Decorative: the visible text names the action.
+type Name = "phone" | "telegram" | "whatsapp" | "instagram" | "facebook" | "pin" | "menu" | "close";
+interface Props { name: Name; size?: number; class?: string; }
+const { name, size = 20, class: cls } = Astro.props;
+---
+<svg class:list={["icon", cls]} width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  {name === "phone" && <path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" />}
+  {name === "telegram" && <path fill="currentColor" d="M21.4 3.6 2.9 10.7c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.8.8s.6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.4-1.9ZM9.6 14.2l-.5 3.9-1.3-4.4 10-6.4-8.2 6.9Z" />}
+  {name === "whatsapp" && (
+    <>
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z" />
+      <path fill="currentColor" d="M9 8.6c0-.3.2-.6.5-.6h.9c.2 0 .4.1.5.3l.6 1.4c.1.2 0 .4-.1.6l-.6.6a6 6 0 0 0 2.7 2.7l.6-.6c.2-.1.4-.2.6-.1l1.4.6c.2.1.3.3.3.5v.9c0 .3-.3.6-.6.6A6.4 6.4 0 0 1 9 8.6Z" />
+    </>
+  )}
+  {name === "instagram" && (
+    <>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8" />
+      <circle cx="12" cy="12" r="3.8" fill="none" stroke="currentColor" stroke-width="1.8" />
+      <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" />
+    </>
+  )}
+  {name === "facebook" && <path fill="currentColor" d="M13.5 21v-7.5H16l.5-3.2h-3V8.4c0-.9.3-1.6 1.6-1.6h1.6V4.1c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4v2.3H7.6v3.2h2.7V21h3.2Z" />}
+  {name === "pin" && (
+    <>
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 21s-6.5-5.8-6.5-11A6.5 6.5 0 0 1 18.5 10c0 5.2-6.5 11-6.5 11Z" />
+      <circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.8" />
+    </>
+  )}
+  {name === "menu" && <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />}
+  {name === "close" && <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18" />}
+</svg>

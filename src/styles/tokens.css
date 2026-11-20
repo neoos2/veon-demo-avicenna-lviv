@@ -1,0 +1,69 @@
+/* Hallmark · shape: custom (column ledger) · genre: editorial · theme: custom · job: book · idea: "Усе пораховано наперед — арифметика клініки в стовпчик" · vibe: "чесна, тепла, сімейна, зрозуміла, сусідська"
+ * paper: #FFFFFF · accent: #00796B · display: Bitter · body: Nata Sans · hero: H1 і дві дії ліворуч, стовпчик трьох фактів праворуч, смуга фото команди під ними · nav: sticky white bar, 5 anchors, phone digits, one action · footer: light reference sheet · imagery: client photos · signature: стовпчик із бірюзовою рискою підсумку
+ * axes: light/slab-serif/chromatic-teal · posture: committed · surface: absolute · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H5 E4 S5 R4 V4 · weakest: P, the page argues only through real numbers; the result line «план і вартість — до початку лікування» states the position plainly */
+/* Hallmark · waive 7b · --color-bg #FFFFFF, --color-on-accent #FFFFFF · approved concept.md §5 Look: white paper (medical cleanliness, no beige) and white on the client's teal #00796B (5.32:1) */
+/* Hallmark · waive 39b · primary actions 56px, direction rows 56px+ · concept.md «Кнопки: основна 56 px» and «цілі натискання ≥ 56 px» for the accordion; the switcher rows carry name and price in two lines */
+/* Hallmark · waive 79 · y 549 to 900 at 1440 · the band is the team photo strip (figure.hero__photo, right after section#top), so the fold shows the faces of the people who treat; it sits outside the section only so the text hero stays one screen at 1920 */
+/* Hallmark · waive 44c · hero section ends at 549px of 900 at 1440 · the first screen continues with the team photo strip (figure.hero__photo) up to the fold, as concept.md «Перший екран 1440 × 900» п. 4 sets it */
+/* Client design tokens from design/concept.md (veon-concept: colors, fonts). */
+:root {
+  /* colour roles */
+  --color-bg: #FFFFFF;
+  --color-surface: #E6F8F7;
+  --color-text: #273849;
+  --color-muted: #4F5D69;
+  --color-accent: #00796B;
+  --color-accent-strong: #005F54;
+  --color-on-accent: #FFFFFF;
+  --color-accent-ink: #FFFFFF;
+  --color-warm: #F8D6B3;
+  --color-operator: #B4501A;
+  --color-line: #C9DCD8;
+  --color-control: #6F8C87;
+  --color-focus: #273849;
+  --color-focus-on-accent: #FFFFFF;
+
+  /* type */
+  --font-display: "Bitter", "Bitter Fallback", Georgia, serif;
+  --font-body: "Nata Sans", "Nata Sans Fallback", Arial, sans-serif;
+  /* scale 390 → 1440 (concept: 56/88 · 40/72 · 32/48 · 22/28 · 20/22 · 18/20 · 16/17 · 14) */
+  --fs-figure: clamp(3.5rem, 2.32rem + 4.88vw, 5.5rem);
+  --fs-figure-xl: clamp(4.5rem, 2.73rem + 7.31vw, 7.5rem);
+  --fs-h1: clamp(2.5rem, 1.76rem + 3.05vw, 4.5rem);
+  --fs-h2: clamp(2rem, 1.63rem + 1.52vw, 3rem);
+  --fs-h3: clamp(1.375rem, 1.24rem + .57vw, 1.75rem);
+  --fs-price: clamp(1.25rem, 1.2rem + .19vw, 1.375rem);
+  --fs-lead: clamp(1.125rem, 1.08rem + .19vw, 1.25rem);
+  --fs-body: clamp(1rem, .98rem + .1vw, 1.0625rem);
+  --fs-small: .875rem;
+  --lh-tight: 1.08;
+  --lh-head: 1.15;
+  --lh-body: 1.55;
+
+  /* space: 8-step rhythm */
+  --s-1: .5rem;
+  --s-2: 1rem;
+  --s-3: 1.5rem;
+  --s-4: 2rem;
+  --s-6: 3rem;
+  --s-9: 4.5rem;
+  --s-14: 7rem;
+  --s-20: 10rem;
+  --section-y: clamp(4.5rem, 3.2rem + 5.3vw, 8rem);
+  --gutter: clamp(1rem, .76rem + 1vw, 1.5rem);
+  --space: clamp(1.25rem, -.25rem + 6.25vw, 5rem);
+  --container: 1280px;
+
+  /* shape and motion */
+  --radius: 4px;
+  --rule: 3px;
+  --header-h: 72px;
+  --bar-h: 64px;
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --dur: 600ms;
+  --dur-fast: 180ms;
+}
+@media (max-width: 767px) {
+  :root { --header-h: 64px; }
+}

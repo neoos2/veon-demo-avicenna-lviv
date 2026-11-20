@@ -1,0 +1,49 @@
+---
+import Icon from "./Icon.astro";
+import { clinic } from "../data/clinic";
+const links = [
+  ["#napryamy", "Послуги"], ["#dity", "Дітям"], ["#ciny", "Ціни"], ["#likar", "Лікар"], ["#zapys", "Контакти"],
+];
+const main = clinic.phones[0];
+---
+<header class="site-header" data-header>
+  <div class="container site-header__in">
+    <a class="brand" href="#top">
+      <img class="brand__logo" src="img/logo-96.webp" width="40" height="40" alt="" />
+      <span class="brand__text">
+        <span class="brand__name">Авіценна</span>
+        <span class="brand__sub">стоматологія на Сихові</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Розділи сторінки">
+      <ul role="list">
+        {links.map(([href, label]) => <li><a class="nav__link" href={href}>{label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="header-phone" href={main.href}>
+        <Icon name="phone" size={20} />
+        <span class="header-phone__num">{main.label}</span>
+        <span class="visually-hidden header-phone__sr">Зателефонувати</span>
+      </a>
+      <a class="btn btn--primary btn--sm" href="#zapys" data-rec="UX-R005,UX-R011">Записатися</a>
+      <details class="menu" data-menu>
+        <summary class="menu__toggle" aria-label="Меню">
+          <Icon name="menu" size={24} class="menu__open" />
+          <Icon name="close" size={24} class="menu__close" />
+        </summary>
+        <div class="menu__panel">
+          <nav aria-label="Меню">
+            <ul role="list" class="menu__list">
+              {links.map(([href, label]) => <li><a class="menu__link" href={href}>{label}</a></li>)}
+            </ul>
+          </nav>
+          <div class="menu__contacts">
+            <a class="btn btn--primary btn--block" href={main.href}><Icon name="phone" />{main.label}</a>
+            <a class="btn btn--outline btn--block" href={clinic.telegram} target="_blank" rel="noopener"><Icon name="telegram" />Написати в Telegram</a>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>

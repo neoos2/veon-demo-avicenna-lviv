@@ -1,0 +1,46 @@
+---
+import Icon from "./Icon.astro";
+import FutureLink from "./FutureLink.astro";
+import { clinic, note } from "../data/clinic";
+const pages = [
+  "Послуги", "Дитяча стоматологія", "Ціни", "Акції", "Лікарі", "Відгуки",
+  "Поради стоматолога", "FAQ", "Стоматологія на Сихові", "Політика конфіденційності",
+];
+---
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a class="brand" href="#top">
+        <img class="brand__logo" src="img/logo-96.webp" width="40" height="40" alt="" />
+        <span class="brand__text"><span class="brand__name">Авіценна</span><span class="brand__sub">стоматологія на Сихові</span></span>
+      </a>
+      <p class="footer__note">Сімейна стоматологія для дорослих і дітей.</p>
+    </div>
+    <div class="footer__col">
+      <p class="footer__h">Контакти</p>
+      <address class="footer__address">м. Львів, {clinic.street}, {clinic.district}, {clinic.landmark}</address>
+      <p>Пн–Сб 9:30–21:00, неділя — вихідний</p>
+      <ul class="footer__phones" role="list">
+        {clinic.phones.map((p) => <li><a href={p.href}>{p.label}</a></li>)}
+      </ul>
+    </div>
+    <div class="footer__col">
+      <p class="footer__h">Сторінки сайту (<FutureLink note={note} class="fl fl--small">у розробці</FutureLink>)</p>
+      <ul class="footer__pages" role="list">
+        {pages.map((x) => <li>{x}</li>)}
+      </ul>
+    </div>
+    <div class="footer__col">
+      <p class="footer__h">Соцмережі</p>
+      <ul class="footer__social" role="list" data-rec="S-R015">
+        <li><a href={clinic.telegram} target="_blank" rel="noopener"><Icon name="telegram" />Telegram</a></li>
+        <li><a href={clinic.instagram} target="_blank" rel="noopener"><Icon name="instagram" />Instagram</a></li>
+        <li><a href={clinic.facebook} target="_blank" rel="noopener"><Icon name="facebook" />Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p>{clinic.license}, безстрокова.</p>
+    <p>© 2019–2026 Авіценна</p>
+  </div>
+</footer>

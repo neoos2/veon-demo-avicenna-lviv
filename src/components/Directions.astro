@@ -1,0 +1,53 @@
+---
+// #napryamy: one list of 7 directions. ≥1024 px — switcher (heads left, the open panel right, each panel its own shape);
+// <1024 px — accordion without large photos. Without JS every panel is simply open.
+import Photo from "./Photo.astro";
+import { directions } from "../data/clinic";
+---
+<div class="dirs" data-dirs>
+  {directions.map((d, i) => (
+    <>
+      <h3 class="dir__head" style={`--row:${i + 1}`}>
+        <button type="button" class="dir__btn" id={`dir-tab-${d.id}`} aria-expanded={i === 0 ? "true" : "false"} aria-controls={`dir-${d.id}`}>
+          <span class="dir__name">{d.name}</span>
+          <span class="dir__tab">{d.tab}</span>
+        </button>
+      </h3>
+      <div class:list={["dir__panel", `dir__panel--${d.shape}`, { "is-open": i === 0 }]} id={`dir-${d.id}`} role="region" aria-labelledby={`dir-tab-${d.id}`}>
+        {d.img && (
+          <Photo class="dir__media" name={d.img.name} widths={d.img.widths} w={d.img.w} h={d.img.h} alt={d.img.alt}
+            sizes="(min-width: 1440px) 720px, (min-width: 1024px) 56vw, 100vw" />
+        )}
+        {d.figure && (
+          <p class="dir__figure">
+            {d.figure.from && <span class="from">від </span>}<span class="dir__figure-val">{d.figure.value}</span>
+            <span class="dir__figure-cap">{d.figure.caption}</span>
+          </p>
+        )}
+        <div class="dir__body">
+          <p class="dir__text">{d.text}</p>
+          {d.note && <p class="dir__note">{d.note}</p>}
+          {d.list && (
+            <ul class="dir__list" role="list">{d.list.map((x) => <li>{x}</li>)}</ul>
+          )}
+          {d.prices && (
+            <dl class:list={["dir__prices", { "dir__prices--pair": d.shape === "pair" }]}>
+              {d.prices.map((p) => (
+                <div class="dir__price-row">
+                  <dt>{p.label}</dt>
+                  <dd>{p.from && <span class="from">від </span>}{p.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+          {d.id === "implantatsiya" && <p class="dir__guarantee">Гарантія: до 10 років на імпланти, 5 років на коронки.</p>}
+          <div class="dir__actions">
+            {d.shape === "kids"
+              ? <a class="btn btn--outline btn--sm" href="#dity">Усе для дітей</a>
+              : <a class="btn btn--outline btn--sm" href="#zapys">Записатися</a>}
+          </div>
+        </div>
+      </div>
+    </>
+  ))}
+</div>

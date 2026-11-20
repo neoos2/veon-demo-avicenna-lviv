@@ -1,0 +1,246 @@
+---
+import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Ledger from "../components/Ledger.astro";
+import Directions from "../components/Directions.astro";
+import Photo from "../components/Photo.astro";
+import Icon from "../components/Icon.astro";
+import FutureLink from "../components/FutureLink.astro";
+import { clinic, priceGroups, note, grn } from "../data/clinic";
+
+const title = "Сімейна стоматологія на Сихові, Львів | Авіценна";
+const description = "Стоматологія «Авіценна» на Сихові: діти й дорослі в одній клініці, ціни на сайті, Пн–Сб 9:30–21:00. Консультація безкоштовно.";
+const main = clinic.phones[0];
+
+const ld = {
+  "@context": "https://schema.org",
+  "@type": ["Dentist", "LocalBusiness"],
+  name: "Авіценна",
+  telephone: clinic.phones.map((p) => p.href.replace("tel:", "")),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: clinic.street,
+    addressLocality: "Львів",
+    addressCountry: "UA",
+  },
+  openingHoursSpecification: [{
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    opens: "09:30", closes: "21:00",
+  }],
+  sameAs: [clinic.instagram, clinic.facebook, clinic.telegram],
+  employee: { "@type": "Physician", name: "Михайло Стадницький", description: "Головний лікар, стоматолог-хірург, 25 років досвіду" },
+};
+---
+<Base lang="uk" title={title} description={description}>
+  <Fragment slot="head">
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 768px)"
+      imagesrcset="img/team-wide-960.avif 960w, img/team-wide-1440.avif 1440w, img/team-wide-1920.avif 1920w" imagesizes="100vw" fetchpriority="high" />
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+  </Fragment>
+  <Header slot="header" />
+
+  <Section id="top" rec="UX-R001,MA-R005" class="hero">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <h1 class="hero__title">Сімейна стоматологія на Сихові у Львові</h1>
+        <p class="hero__lead">Дорослі й діти — в одній клініці. Перед лікуванням пояснюємо план, терміни й вартість.</p>
+        <div class="hero__actions" data-hero-cta>
+          <a class="btn btn--primary btn--lg" href={main.href} data-rec="UX-R005,UX-R011"><Icon name="phone" />Зателефонувати</a>
+          <a class="btn btn--outline" href={clinic.telegram} target="_blank" rel="noopener"><Icon name="telegram" />Написати в Telegram</a>
+        </div>
+      </div>
+      <Ledger class="hero__ledger" animate rows={[
+        { value: "0 грн", label: "консультація стоматолога" },
+        { op: "+", value: "21:00", label: "до цієї години приймаємо, Пн\u2060–\u2060Сб" },
+        { op: "+", value: "Сихів", label: "вул. Б. Антоненка-Давидовича, 1, напроти «Сільпо»" },
+      ]} result="план і вартість — до початку лікування" />
+    </div>
+  </Section>
+  <figure class="hero__photo">
+      <picture>
+        <source media="(min-width: 768px)" type="image/avif" sizes="100vw" width="1920" height="760"
+          srcset="img/team-wide-640.avif 640w, img/team-wide-960.avif 960w, img/team-wide-1440.avif 1440w, img/team-wide-1920.avif 1920w" />
+        <source media="(min-width: 768px)" type="image/webp" sizes="100vw" width="1920" height="760"
+          srcset="img/team-wide-640.webp 640w, img/team-wide-960.webp 960w, img/team-wide-1440.webp 1440w, img/team-wide-1920.webp 1920w" />
+        <source type="image/avif" sizes="100vw" srcset="img/team-43-480.avif 480w, img/team-43-780.avif 780w, img/team-43-1170.avif 1170w" />
+        <img src="img/team-43-780.webp" srcset="img/team-43-480.webp 480w, img/team-43-780.webp 780w, img/team-43-1170.webp 1170w" sizes="100vw"
+          width="1170" height="878" alt="Команда клініки «Авіценна» в кабінеті: четверо лікарів і асистентів усміхаються" fetchpriority="high" decoding="async" data-rec="SE-R007" />
+      </picture>
+      <figcaption class="container hero__caption">Команда клініки, головний лікар Михайло Стадницький — у центрі.</figcaption>
+  </figure>
+
+  <Section id="napryamy" rec="UX-R003,UX-R004" class="section dirs-section">
+    <div class="container">
+      <div class="section__head">
+        <h2>З чим ви прийшли</h2>
+        <p class="section__lead">Сім напрямів в одній клініці. Оберіть свій, щоб побачити ціну.</p>
+      </div>
+      <Directions />
+      <p class="block-more"><FutureLink note={note} class="fl">Сторінки напрямів</FutureLink></p>
+    </div>
+  </Section>
+
+  <Section id="dity" rec="UX-R009" class="kids">
+    <div class="container kids__grid">
+      <Photo class="kids__photo" name="child" widths={[480, 720, 1024]} w={1024} h={1280}
+        alt="Лікарка нахилилася до дівчинки в стоматологічному кріслі під час огляду" sizes="(min-width: 1024px) 40vw, 100vw" />
+      <div class="kids__body">
+        <h2>Дітям і всій родині</h2>
+        <p class="formula" data-reveal data-formula>
+          <span class="formula__n">3</span>
+          <span class="formula__plus"><span class="op">+</span>&nbsp;1</span>
+          <span class="formula__eq"><span class="op">=</span>&nbsp;3</span>
+        </p>
+        <p class="formula__caption">Оптом дешевше: герметизація зубів у дітей</p>
+        <ul class="family" role="list">
+          <li class="family__row"><span class="family__who">Двоє з родини</span><span class="family__val">−10%</span></li>
+          <li class="family__row"><span class="family__who">Троє і більше</span><span class="family__val">−12%</span></li>
+        </ul>
+        <p class="kids__small">Сімейна знижка на лікування членів однієї родини.</p>
+        <p class="kids__price"><span>Дитяча професійна гігієна до 14 років</span><span class="kids__price-val">{grn("950")}</span></p>
+        <p class="kids__text">Для дітей: герметизація фісур, фторування, дитячий ортодонт.</p>
+        <div class="kids__actions">
+          <a class="btn btn--primary" href="#zapys" data-rec="UX-R005,UX-R011">Записати дитину</a>
+          <FutureLink note={note} class="fl">Дитяча стоматологія</FutureLink>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="ciny" class="section prices">
+    <div class="container prices__grid">
+      <div class="prices__aside">
+        <h2>Ціни, які видно до візиту</h2>
+        <p class="section__lead">Прайс на 251 послугу, оновлений 02.11.2026. Консультація стоматолога безкоштовна.</p>
+        <div class="guarantee">
+          <p class="guarantee__row"><span class="guarantee__val"><span class="from">до </span>10 років</span><span class="guarantee__label">гарантія на імпланти</span></p>
+          <p class="guarantee__row"><span class="guarantee__val">5 років</span><span class="guarantee__label">гарантія на коронки</span></p>
+          <p class="guarantee__note">Для інших робіт умови гарантії пояснює лікар.</p>
+        </div>
+        <ul class="prices__links" role="list">
+          <li><FutureLink note={note} class="fl">Повний прайс</FutureLink></li>
+        </ul>
+      </div>
+      <div class="prices__sheet">
+        <table class="price-table">
+          <caption class="visually-hidden">Ключові ціни клініки</caption>
+          {priceGroups.map((g) => (
+            <tbody>
+              <tr class="price-table__group"><th colspan="2" scope="colgroup">{g.title}</th></tr>
+              {g.rows.map((r) => (
+                <tr>
+                  <th scope="row">{r.label}</th>
+                  <td>{r.from && <span class="from">від </span>}{r.value}</td>
+                </tr>
+              ))}
+            </tbody>
+          ))}
+        </table>
+        <p class="prices__promo"><span class="op">−10%</span> на гігієну до дня народження</p>
+        <a class="btn btn--primary" href="#zapys" data-rec="UX-R005,UX-R011">Записатися</a>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="likar" class="section doctor">
+    <div class="container doctor__grid">
+      <Photo class="doctor__photo" name="likar" widths={[640, 960, 1280]} w={1280} h={853}
+        alt="Головний лікар Михайло Стадницький оглядає пацієнтку в кабінеті з помаранчевими жалюзі" sizes="(min-width: 1024px) 56vw, 100vw" />
+      <div class="doctor__body">
+        <h2>Головний лікар і обладнання</h2>
+        <p class="doctor__name">Михайло Стадницький</p>
+        <p class="doctor__role">Стоматолог-хірург, 25 років досвіду</p>
+        <ul class="doctor__facts" role="list">
+          <li>ЛНМУ ім. Данила Галицького, 2002</li>
+          <li>Курси з пародонтології, ортопедії, імплантології MegaGen</li>
+          <li>Лікарі клініки — з досвідом від 5 до 25 років</li>
+        </ul>
+        <FutureLink note={note} class="fl">Усі лікарі</FutureLink>
+      </div>
+    </div>
+    <div class="container equipment">
+      <Photo class="equipment__photo" name="microscope" widths={[240, 480]} w={480} h={480}
+        alt="Стоматологічний мікроскоп COXO в кабінеті клініки" sizes="120px" />
+      <p class="equipment__text"><strong>Мікроскоп, 3D-сканер зубів, цифрове планування.</strong> КТ і панорамний знімок — за направленням, не в клініці.</p>
+    </div>
+  </Section>
+
+  <Section id="dovira" rec="UX-R008" class="trust">
+    <div class="container trust__grid">
+      <h2 class="trust__title">Перевірити нас можна до візиту</h2>
+      <div class="trust__item trust__item--rating">
+        <p class="trust__big">4,5</p>
+        <p class="trust__text">Рейтинг у Google, 71 відгук</p>
+        <FutureLink note={note} class="fl fl--light">Відгуки</FutureLink>
+      </div>
+      <div class="trust__item">
+        <p class="trust__head">{clinic.license}</p>
+        <p class="trust__text">Безстрокова. Стоматологія, ортопедична стоматологія, ортодонтія.</p>
+      </div>
+      <div class="trust__item">
+        <p class="trust__head">MegaGen</p>
+        <p class="trust__text">Офіційно сертифікована клініка MegaGen Implant System.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="zapys" rec="UX-R005,UX-R011" class="section book">
+    <div class="container book__grid">
+      <div class="book__main">
+        <h2>Запис — телефоном або в месенджері</h2>
+        <div class="ledger ledger--l book__ledger ledger--animate-view" data-reveal data-ledger>
+          <ul class="ledger__rows" role="list">
+            <li class="ledger__row book__row">
+              <span class="ledger__op" aria-hidden="true"></span>
+              <a class="book__phone" href={main.href}>{main.label}</a>
+              <span class="ledger__label">телефон, основний</span>
+            </li>
+            <li class="ledger__row book__row">
+              <span class="ledger__op" aria-hidden="true">+</span>
+              <a class="btn btn--outline btn--channel" href={clinic.telegram} target="_blank" rel="noopener"><Icon name="telegram" />Telegram</a>
+              <span class="ledger__label">напишіть, не телефонуючи</span>
+            </li>
+            <li class="ledger__row book__row">
+              <span class="ledger__op" aria-hidden="true">+</span>
+              <a class="btn btn--outline btn--channel" href={clinic.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp</a>
+              <span class="ledger__label">той самий номер 093</span>
+            </li>
+          </ul>
+          <div class="ledger__rule" aria-hidden="true"></div>
+          <p class="ledger__result"><span class="ledger__op" aria-hidden="true">=</span><span class="ledger__res-text">безкоштовна консультація</span></p>
+        </div>
+        <p class="book__more">Інші номери: <a href={clinic.phones[1].href}>{clinic.phones[1].label}</a>, <a href={clinic.phones[2].href}>{clinic.phones[2].label}</a></p>
+        <p class="book__abroad">Ви за кордоном? Напишіть у Telegram або WhatsApp.</p>
+        <p class="book__online">Онлайн-запис з'явиться пізніше: <FutureLink note={note} class="fl fl--small">онлайн-запис</FutureLink></p>
+      </div>
+      <div class="book__info">
+        <h3 class="book__h">Графік</h3>
+        <ul class="week" role="list">
+          {clinic.week.map(([d, t]) => (
+            <li class:list={["week__day", { "week__day--off": t === "вихідний" }]}><span class="week__name">{d}</span><span class="week__time">{t}</span></li>
+          ))}
+        </ul>
+        <h3 class="book__h">Адреса</h3>
+        <address class="book__address">
+          м. Львів, {clinic.street}, {clinic.district}.<br />{clinic.landmark[0].toUpperCase() + clinic.landmark.slice(1)}.
+        </address>
+        <p class="book__text">Біля клініки є місця для авто пацієнтів, поруч зупинки транспорту.</p>
+        <a class="link-strong" href={clinic.map} target="_blank" rel="noopener"><Icon name="pin" />Відкрити на карті</a>
+      </div>
+    </div>
+  </Section>
+
+  <Footer slot="footer" />
+
+  <div class="action-bar" data-action-bar data-rec="UX-R006" slot="after">
+    <a class="btn btn--primary" href={main.href}><Icon name="phone" />Зателефонувати</a>
+    <a class="btn btn--outline" href={clinic.telegram} target="_blank" rel="noopener"><Icon name="telegram" />Telegram</a>
+  </div>
+</Base>
+
+<script>
+  import "../scripts/page.ts";
+</script>

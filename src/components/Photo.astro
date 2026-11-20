@@ -1,0 +1,15 @@
+---
+// Client photo from public/img as <picture> (AVIF + WebP), relative paths so the demo works in a subfolder.
+interface Props {
+  name: string; widths: number[]; w: number; h: number; alt: string; sizes: string;
+  loading?: "lazy" | "eager"; priority?: boolean; class?: string; rec?: string;
+}
+const { name, widths, w, h, alt, sizes, loading = "lazy", priority = false, class: cls, rec } = Astro.props;
+const set = (ext: string) => widths.map((x) => `img/${name}-${x}.${ext} ${x}w`).join(", ");
+const fallback = `img/${name}-${widths[widths.length - 1]}.webp`;
+---
+<picture class={cls}>
+  <source type="image/avif" srcset={set("avif")} sizes={sizes} />
+  <img src={fallback} srcset={set("webp")} sizes={sizes} width={w} height={h} alt={alt}
+    loading={priority ? "eager" : loading} decoding="async" fetchpriority={priority ? "high" : undefined} data-rec={rec} />
+</picture>

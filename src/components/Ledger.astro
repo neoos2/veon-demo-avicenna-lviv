@@ -1,0 +1,19 @@
+---
+// Signature «стовпчик»: operators on the left, figures on one right edge, a teal result rule, the result line.
+interface Row { op?: string; value: string; label: string; }
+interface Props { rows: Row[]; result: string; class?: string; animate?: boolean; size?: "xl" | "l"; }
+const { rows, result, class: cls, animate = false, size = "xl" } = Astro.props;
+---
+<figure class:list={["ledger", `ledger--${size}`, { "ledger--animate": animate }, cls]}>
+  <ul class="ledger__rows" role="list">
+    {rows.map((r) => (
+      <li class="ledger__row">
+        <span class="ledger__op" aria-hidden="true">{r.op ?? ""}</span>
+        <span class="ledger__val">{r.value}</span>
+        <span class="ledger__label">{r.label}</span>
+      </li>
+    ))}
+  </ul>
+  <div class="ledger__rule" aria-hidden="true"></div>
+  <p class="ledger__result"><span class="ledger__op" aria-hidden="true">=</span><span class="ledger__res-text">{result}</span></p>
+</figure>
